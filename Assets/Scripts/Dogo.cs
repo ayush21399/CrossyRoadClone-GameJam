@@ -37,7 +37,9 @@ public class Dogo : MonoBehaviour
             if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
             {
 
-                Vector3Int targetGridPosition = new Vector3Int(Mathf.RoundToInt(targetpos.x / gridsize), Mathf.RoundToInt(targetpos.y / gridsize), Mathf.RoundToInt(targetpos.z / gridsize));
+                // Vector3Int targetGridPosition = new Vector3Int(Mathf.RoundToInt(targetpos.x / gridsize), Mathf.RoundToInt(targetpos.y / gridsize), Mathf.RoundToInt(targetpos.z / gridsize));
+                // commented reason: it was keeping y position to 0 or 1 , and not in between at 0.6. it was rounding it up.
+                Vector3 targetGridPosition = new Vector3(Mathf.Round(targetpos.x / gridsize),targetpos.y, Mathf.Round(targetpos.z / gridsize));
                 targetGridPosition += new Vector3Int(Mathf.RoundToInt(horizontalInput), 0, Mathf.RoundToInt(verticalInput));
                 targetpos = new Vector3(targetGridPosition.x * gridsize, targetGridPosition.y * gridsize, targetGridPosition.z * gridsize);
 
