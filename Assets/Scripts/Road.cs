@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class Road : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject carPre; 
+    public Transform leftSpawnPoint;
+    public Transform rightSpawnPoint;
+
+    public float spawnInterval = 2f;
+
+    private Transform spawnPoint;
+
     void Start()
     {
-        
+        spawnPoint = Random.Range(0, 2) == 0 ? leftSpawnPoint : rightSpawnPoint;
+
+        InvokeRepeating("SpawnCar", 0f, spawnInterval);
+      
     }
 
     // Update is called once per frame
@@ -15,4 +25,20 @@ public class Road : MonoBehaviour
     {
         
     }
+
+
+    private void SpawnCar()
+    {
+        
+       
+
+        // Instantiate the car object at the chosen spawn point
+        GameObject newCar = Instantiate(carPre, spawnPoint.position, spawnPoint.rotation);
+    }
+
 }
+
+
+
+
+
