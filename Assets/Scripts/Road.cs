@@ -8,7 +8,7 @@ public class Road : MonoBehaviour
     public Transform leftSpawnPoint;
     public Transform rightSpawnPoint;
 
-    public float spawnInterval = 2f;
+    public float spawnInterval;
 
     private Transform spawnPoint;
 
@@ -24,6 +24,8 @@ public class Road : MonoBehaviour
         //----- 
 
         spawnPoint = Random.Range(0, 2) == 0 ? leftSpawnPoint : rightSpawnPoint;
+
+        spawnInterval = Random.Range(1, 3); //fixed up interval by making it random to 1 & 3. 0 will not spawn anything or mess things up.
 
         InvokeRepeating("SpawnCar", 0f, spawnInterval);
         
