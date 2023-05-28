@@ -35,7 +35,7 @@ public class Car : MonoBehaviour
         {
             transform.position += Vector3.left * Time.deltaTime * speed;
 
-            if (transform.position.x > leftspawn.position.x)
+            if (transform.position.x < leftspawn.position.x)
             { Destroy(gameObject); }
         }
         
