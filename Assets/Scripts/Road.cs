@@ -45,9 +45,11 @@ public class Road : MonoBehaviour
         GameObject newCar = Instantiate(carPre, spawnPoint.position, spawnPoint.rotation);         
         newCar.GetComponent<Car>().speed = carspeed; // modifying the valye of carspeed into speed variable in car script that is attached to car
         newCar.GetComponent<Car>().spawnDirection = spawnPoint; //will send spawnpoint tranfrom of this script into spawn direction transform of car script attahed to car
-        
-        //
-        
+
+        //edit try
+        newCar.GetComponent<Car>().leftspawn = leftSpawnPoint;
+        newCar.GetComponent<Car>().rightspawn = rightSpawnPoint;
+
     }
 
 }
