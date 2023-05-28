@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Dogo : MonoBehaviour
 {
+
+    //NOTE : REWRITE WHOLE WALKING-JUMPING SCRIPT BCZ OF COLLISION
+
     public float gridsize = 1f;
     public float movespeed = 8f;
 
