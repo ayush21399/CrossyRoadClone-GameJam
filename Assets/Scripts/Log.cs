@@ -17,7 +17,7 @@ public class Log : MonoBehaviour
         // Vector3 carDirection = transform.forward;
         // Debug.Log(spawnDirection);
 
-        log_length = Random.Range(0.1f, 0.5f);
+        log_length = Random.Range(0.1f, 0.4f);
         transform.localScale = new Vector3(log_length, transform.localScale.y, transform.localScale.z);
     }
 

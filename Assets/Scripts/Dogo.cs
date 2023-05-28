@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dogo : MonoBehaviour
 {
     public float gridsize = 1f;
-    public float movespeed = 10f;
+    public float movespeed = 8f;
 
     public float stutter = 0.2f;
 
@@ -16,7 +16,14 @@ public class Dogo : MonoBehaviour
 
     private Vector3 targetpos;
     private bool isMoving = false;
+
+    //private bool movecheck = true; private Vector3 oldpos;
+
+    Vector3 startPosition;
+    Vector3 jumpTargetPosition;
+
     
+
 
     void Start()
     {
@@ -29,7 +36,17 @@ public class Dogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+            ismovingcheck();
 
+        //-----collision detection-----
+        
+        //-----------------------------
+
+    }
+
+    public void ismovingcheck()
+    {
         if (!isMoving)
         {
             float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -40,7 +57,7 @@ public class Dogo : MonoBehaviour
 
                 // Vector3Int targetGridPosition = new Vector3Int(Mathf.RoundToInt(targetpos.x / gridsize), Mathf.RoundToInt(targetpos.y / gridsize), Mathf.RoundToInt(targetpos.z / gridsize));
                 // commented reason: it was keeping y position to 0 or 1 , and not in between at 0.6. it was rounding it up.
-                Vector3 targetGridPosition = new Vector3(Mathf.Round(targetpos.x / gridsize),targetpos.y, Mathf.Round(targetpos.z / gridsize));
+                Vector3 targetGridPosition = new Vector3(Mathf.Round(targetpos.x / gridsize), targetpos.y, Mathf.Round(targetpos.z / gridsize));
                 targetGridPosition += new Vector3Int(Mathf.RoundToInt(horizontalInput), 0, Mathf.RoundToInt(verticalInput));
                 targetpos = new Vector3(targetGridPosition.x * gridsize, targetGridPosition.y * gridsize, targetGridPosition.z * gridsize);
 
@@ -48,11 +65,6 @@ public class Dogo : MonoBehaviour
             }
 
         }
-
-        //-----collision detection-----
-        
-        //-----------------------------
-
     }
 
     //----------movement & jumping -------------------
@@ -89,8 +101,8 @@ public class Dogo : MonoBehaviour
     private IEnumerator JumpAnimation()
     {
         float elapsedTime = 0f;
-        Vector3 startPosition = transform.position;
-        Vector3 jumpTargetPosition = targetpos + Vector3.up * jumphight;
+        startPosition = transform.position;
+        jumpTargetPosition = targetpos + Vector3.up * jumphight;
 
         while (elapsedTime < jumptime)
         {
@@ -109,14 +121,31 @@ public class Dogo : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("LOG"))
         {
-            Debug.Log("log che bhai");
+            //Debug.Log("log che bhai");
             GameObject gameobj = collision.gameObject;
             Vector3 movetransform = new Vector3(gameobj.transform.position.x, this.transform.position.y, this.transform.position.z);
             transform.position = movetransform;
-                                
+
             targetpos.x = movetransform.x; //edit this field to change new transfer position. solved error with this line when player snap to x position where he boarded log.  
         }                                  //play with this line if snaping issue occurs, nothing else was changed for that error.
+
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Tree"))
+        {
+            //transform.position = targetpos;
+            //Destroy(gameObject);
+            //rb.AddForce(startPosition);
+            //isMoving = true;
+            //movecheck = false;
+            
+        }
+    }
+
+
+
     /*
     private void OnCollisionExit(Collision collision)
     {
