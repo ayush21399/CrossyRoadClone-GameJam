@@ -12,14 +12,15 @@ public class Dogo : MonoBehaviour
     public float jumphight = 0.25f;
     public float jumptime = 0.15f;
 
-    Rigidbody rb;
+    Rigidbody rb; //have'nt used rb yet
 
     private Vector3 targetpos;
     private bool isMoving = false;
+    
 
     void Start()
     {
-        rb = GetComponent <Rigidbody>();
+        rb = GetComponent <Rigidbody>(); //have'nt used rigidbody yet
 
         targetpos = transform.position;
 
@@ -48,9 +49,13 @@ public class Dogo : MonoBehaviour
 
         }
 
+        //-----collision detection-----
+        
+        //-----------------------------
+
     }
 
-
+    //----------movement & jumping -------------------
     private IEnumerator movtotar()
     {
 
@@ -97,11 +102,32 @@ public class Dogo : MonoBehaviour
 
         // Snap to the jump target
         transform.position = jumpTargetPosition;
-
+        
     }
-
-
-
+    //-----------------------------
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("LOG"))
+        {
+            Debug.Log("log che bhai");
+            GameObject gameobj = collision.gameObject;
+            Vector3 movetransform = new Vector3(gameobj.transform.position.x, this.transform.position.y, this.transform.position.z);
+            transform.position = movetransform;
+                                
+            targetpos.x = movetransform.x; //edit this field to change new transfer position. solved error with this line when player snap to x position where he boarded log.  
+        }                                  //play with this line if snaping issue occurs, nothing else was changed for that error.
+    }
+    /*
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("LOG"))
+        {
+            Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            transform.position = newPosition;
+        }
+    }
+    */
+    //-----------Collision detection-----
 
 
 }
