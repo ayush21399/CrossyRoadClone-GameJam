@@ -24,19 +24,30 @@ public class Car : MonoBehaviour
    
     void Update()
     {
-        if (spawnDirection.position.x < 0)
+        //if (spawnDirection == null || leftspawn == null || rightspawn == null)
+        // {
+        //     Destroy(gameObject);
+        // }
+        if (spawnDirection != null)
         {
-            transform.position += Vector3.right * Time.deltaTime * speed;
+            if (spawnDirection.position.x < 0)
+            {
+                transform.position += Vector3.right * Time.deltaTime * speed;
 
-            if (transform.position.x > rightspawn.position.x)
-            {   Destroy(gameObject); }
+                if (transform.position.x > rightspawn.position.x)
+                { Destroy(gameObject); }
+            }
+            if (spawnDirection.position.x > 0)
+            {
+                transform.position += Vector3.left * Time.deltaTime * speed;
+
+                if (transform.position.x < leftspawn.position.x)
+                { Destroy(gameObject); }
+            }
         }
-        if (spawnDirection.position.x > 0)
+        else
         {
-            transform.position += Vector3.left * Time.deltaTime * speed;
-
-            if (transform.position.x < leftspawn.position.x)
-            { Destroy(gameObject); }
+            Destroy(gameObject);
         }
         
     }

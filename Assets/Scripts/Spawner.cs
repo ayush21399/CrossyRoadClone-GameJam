@@ -72,6 +72,9 @@ public class Spawner : MonoBehaviour
         Ray ray = new Ray(upSpawn.position, Vector3.down);
         RaycastHit hit;
 
+        Ray raytwo = new Ray(downSpawn.position, Vector3.down);
+        RaycastHit hittwo;
+
         if (Physics.Raycast(ray, out hit, raycastdist))
         {
             //Debug.Log(hit.point.y);
@@ -79,12 +82,21 @@ public class Spawner : MonoBehaviour
         }
         else
         spawning();
+
+        if (Physics.Raycast(raytwo, out hittwo, raycastdist))
+        {
+            despawning(hittwo);
+        }
     }
     public void spawning()
     {
         Vector3 spawnexactpost = new Vector3(0, 0, Mathf.RoundToInt(upSpawn.position.z)); //we can use upspawn, but upspawn position is different, we need to spawn road in x-y 0-0 and changed z.
         Instantiate(road, spawnexactpost, Quaternion.identity);
 
+    }
+    public void despawning(RaycastHit hittwo)
+    {
+        Destroy(hittwo.collider.gameObject);
     }
     //------------------------playing with ray---------------------\\
 
