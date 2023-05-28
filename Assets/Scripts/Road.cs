@@ -20,7 +20,7 @@ public class Road : MonoBehaviour
     void Start()
     {
         //speed to send in car script
-        carspeed = Random.Range(1, 7);
+        carspeed = Random.Range(3, 7);
         //----- 
 
         spawnPoint = Random.Range(0, 2) == 0 ? leftSpawnPoint : rightSpawnPoint;
