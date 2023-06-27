@@ -7,6 +7,9 @@ public class Dogo : MonoBehaviour
 
     //NOTE : REWRITE WHOLE WALKING-JUMPING SCRIPT BCZ OF COLLISION
 
+    public float horizontalInput;
+    public float verticalInput;
+
     public float gridsize = 1f;
     public float movespeed = 8f;
 
@@ -26,15 +29,25 @@ public class Dogo : MonoBehaviour
     Vector3 jumpTargetPosition;
 
 
-    //child direction to detact ray, 4 direction checkers. ----- we directly shoot ray from dog
-     ///public Transform forwardcheck;
-     ///public Transform backwardcheck;
-     ///public Transform leftcheck;
-     ///public Transform rightcheck;
-   //------
-    public float raycastdist = 1f;
+    //child direction to detact ray, 4 direction checkers. ----- not using as we directly shoot ray from dog
+    ///public Transform forwardcheck;
+    ///public Transform backwardcheck;
+    ///public Transform leftcheck;
+    ///public Transform rightcheck;
+    //------
+    public float raycastdist = 1f; // make it 1
     public float raycastinterval = 10f;
     public float timer = 0f;
+    private Ray rayfor; private RaycastHit hitfor; public bool forr = false;
+    private Ray raybac; private RaycastHit hitbac; public bool bacc = false;
+    private Ray raylef; private RaycastHit hitlef; public bool leff = false;
+    private Ray rayrig; private RaycastHit hitrig; public bool rigg = false;
+
+
+
+
+   // public bool HorInputController = false;
+   // public bool VerInputController = false;
 
     void Start()
     {
@@ -55,7 +68,7 @@ public class Dogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-   
+       
         //-----collision detection-----
 
         //-----------------------------
@@ -73,34 +86,39 @@ public class Dogo : MonoBehaviour
 
     public void raycheck()
     {
-        Ray rayfor = new Ray(transform.position, Vector3.forward);
-        RaycastHit hitfor;
+        rayfor = new Ray(transform.position, Vector3.forward);
+        //RaycastHit hitfor;
 
-        Ray raybac = new Ray(transform.position, Vector3.back);
-        RaycastHit hitbac;
+        raybac = new Ray(transform.position, Vector3.back);
+        //RaycastHit hitbac;
 
-        Ray raylef = new Ray(transform.position, Vector3.left);
-        RaycastHit hitlef;
+        raylef = new Ray(transform.position, Vector3.left);
+        //RaycastHit hitlef;
 
-        Ray rayrig = new Ray(transform.position, Vector3.right);
-        RaycastHit hitrig;
+        rayrig = new Ray(transform.position, Vector3.right);
+        //RaycastHit hitrig;
 
+        //setting up boolean depending on what path (for bac lef rig) is getting blokced. this vallues gets passed to ismovingcheck() 
         if (Physics.Raycast(rayfor, out hitfor, raycastdist) && hitfor.collider.CompareTag("Tree"))
         {
-            //Debug.Log("tree detected");
+            forr = true;
         }
+        else { forr = false; }
         if (Physics.Raycast(raybac, out hitbac, raycastdist) && hitbac.collider.CompareTag("Tree"))
         {
-            //Debug.Log("tree detected");
+            bacc = true;      
         }
+        else { bacc = false; }
         if (Physics.Raycast(raylef, out hitlef, raycastdist) && hitlef.collider.CompareTag("Tree"))
         {
-            //Debug.Log("tree detected");
+            leff = true;
         }
+        else { leff = false; }
         if (Physics.Raycast(rayrig, out hitrig, raycastdist) && hitrig.collider.CompareTag("Tree"))
         {
-            //Debug.Log("tree detected");
+            rigg = true;
         }
+        else { rigg = false; }
 
         //Debug.DrawRay(rayfor.origin, rayfor.direction * raycastdist, Color.red);
         // else
@@ -112,12 +130,32 @@ public class Dogo : MonoBehaviour
         // }
     }
 
+
     public void ismovingcheck()
     {
         if (!isMoving)
         {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-            float verticalInput = Input.GetAxisRaw("Vertical");
+            horizontalInput = Input.GetAxisRaw("Horizontal");
+            verticalInput = Input.GetAxisRaw("Vertical");
+
+            //----------- checking blockage in front back or left right (ray cast will controll bools), if path is blocked ver-hor input will get zero depending on what path gets blocked. 
+            if (forr == true && verticalInput == 1)
+            {                  
+                verticalInput = 0;
+            }
+            if (bacc == true && verticalInput == -1)
+            {
+                verticalInput = 0;
+            }
+            if (leff == true && horizontalInput == -1)
+            {
+                horizontalInput = 0;
+            }
+            if (rigg == true && horizontalInput == 1)
+            {
+                horizontalInput = 0;
+            }
+            //------------
 
             if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
             {
