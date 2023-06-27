@@ -140,7 +140,7 @@ public class Dogo : MonoBehaviour
 
             //----------- checking blockage in front back or left right (ray cast will controll bools), if path is blocked ver-hor input will get zero depending on what path gets blocked. 
             if (forr == true && verticalInput == 1)
-            {                  
+            {
                 verticalInput = 0;
             }
             if (bacc == true && verticalInput == -1)
@@ -156,6 +156,11 @@ public class Dogo : MonoBehaviour
                 horizontalInput = 0;
             }
             //------------
+
+            if ((horizontalInput > 0.1 || horizontalInput < -0.1f) && (verticalInput > 0.1 || verticalInput < -0.1f))
+            {
+                horizontalInput = 0; verticalInput = 0;
+            }
 
             if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
             {
