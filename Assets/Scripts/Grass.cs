@@ -19,7 +19,8 @@ public class Grass : MonoBehaviour
             float treespawnarea = Random.Range(minX, maxX);
             //treespawnarea = treespawnarea + 0.5f; //to remmove error where player's landing position can be in tree's position, due to that we had issues with collider.
                                                   //Debug.Log(treespawnarea);
-            Instantiate(treePrefab, new Vector3(treespawnarea, this.transform.position.y + 1, this.transform.position.z), Quaternion.identity);
+           GameObject newtree = Instantiate(treePrefab, new Vector3(treespawnarea, this.transform.position.y + 1, this.transform.position.z), Quaternion.identity);
+           newtree.transform.SetParent(transform); //giving newtree handle of treeprefab to make new spawning tree as child of grass lane.
         }
     }
 
