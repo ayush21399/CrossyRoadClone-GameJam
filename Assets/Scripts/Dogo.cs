@@ -163,6 +163,12 @@ public class Dogo : MonoBehaviour
                 horizontalInput = 0; verticalInput = 0;
             }
             //------
+            // to keep player within bound of limited x axis,
+            if ((transform.position.x <= -10 && horizontalInput == -1) || (transform.position.x >= 10 && horizontalInput == 1))
+            {
+                horizontalInput = 0;
+            }
+            //------
 
             if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
             {
