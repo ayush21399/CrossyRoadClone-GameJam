@@ -25,27 +25,91 @@ public class Dogo : MonoBehaviour
     Vector3 startPosition;
     Vector3 jumpTargetPosition;
 
-    
 
+    //child direction to detact ray, 4 direction checkers. ----- we directly shoot ray from dog
+     ///public Transform forwardcheck;
+     ///public Transform backwardcheck;
+     ///public Transform leftcheck;
+     ///public Transform rightcheck;
+   //------
+    public float raycastdist = 1f;
+    public float raycastinterval = 10f;
+    public float timer = 0f;
 
     void Start()
     {
-        rb = GetComponent <Rigidbody>(); //have'nt used rigidbody yet
+        rb = GetComponent<Rigidbody>(); //have'nt used rigidbody yet
 
         targetpos = transform.position;
 
+        // ----------- 4 direction checkers-------- not using right now, we directly cast ray from dog
+        //forwardcheck = transform.Find("ForwardCheck");
+        //backwardcheck = transform.Find("BackwardCheck");
+        //leftcheck = transform.Find("LeftCheck");
+        //rightcheck = transform.Find("RightCheck");
+        //
+
+        //Debug.Log(forwardcheck.transform.position) ; Debug.Log(backwardcheck.transform.position);  Debug.Log(leftcheck.transform.position);  Debug.Log(rightcheck.transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-            ismovingcheck();
-
+   
         //-----collision detection-----
-        
+
         //-----------------------------
 
+        ///4 direction spawner ray check
+        timer++;
+        if (timer % raycastinterval == 0)
+        {
+            raycheck();
+        }
+        //
+
+        ismovingcheck();
+    }
+
+    public void raycheck()
+    {
+        Ray rayfor = new Ray(transform.position, Vector3.forward);
+        RaycastHit hitfor;
+
+        Ray raybac = new Ray(transform.position, Vector3.back);
+        RaycastHit hitbac;
+
+        Ray raylef = new Ray(transform.position, Vector3.left);
+        RaycastHit hitlef;
+
+        Ray rayrig = new Ray(transform.position, Vector3.right);
+        RaycastHit hitrig;
+
+        if (Physics.Raycast(rayfor, out hitfor, raycastdist) && hitfor.collider.CompareTag("Tree"))
+        {
+            //Debug.Log("tree detected");
+        }
+        if (Physics.Raycast(raybac, out hitbac, raycastdist) && hitbac.collider.CompareTag("Tree"))
+        {
+            //Debug.Log("tree detected");
+        }
+        if (Physics.Raycast(raylef, out hitlef, raycastdist) && hitlef.collider.CompareTag("Tree"))
+        {
+            //Debug.Log("tree detected");
+        }
+        if (Physics.Raycast(rayrig, out hitrig, raycastdist) && hitrig.collider.CompareTag("Tree"))
+        {
+            //Debug.Log("tree detected");
+        }
+
+        //Debug.DrawRay(rayfor.origin, rayfor.direction * raycastdist, Color.red);
+        // else
+
+
+        //  if (Physics.Raycast(raytwo, out hittwo, raycastdist))
+        // {
+        //     despawning(hittwo);
+        // }
     }
 
     public void ismovingcheck()
@@ -84,14 +148,14 @@ public class Dogo : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, targetpos, movespeed * Time.deltaTime);
 
-            distance = Vector3.Distance(transform.position, targetpos); 
+            distance = Vector3.Distance(transform.position, targetpos);
 
             yield return null;
         }
 
         transform.position = targetpos;
 
-       // rb.AddForce(0, 2f, 0); isnt smooth enough
+        // rb.AddForce(0, 2f, 0); isnt smooth enough
 
         yield return new WaitForSeconds(stutter);
 
@@ -117,7 +181,7 @@ public class Dogo : MonoBehaviour
 
         // Snap to the jump target
         transform.position = jumpTargetPosition;
-        
+
     }
     //-----------------------------
     private void OnCollisionStay(Collision collision)
@@ -143,7 +207,7 @@ public class Dogo : MonoBehaviour
             //rb.AddForce(startPosition);
             //isMoving = true;
             //movecheck = false;
-            
+
         }
     }
 
