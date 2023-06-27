@@ -157,10 +157,12 @@ public class Dogo : MonoBehaviour
             }
             //------------
 
+            //  Checking diagonal movement and canceling it -- checking if the horizontal value and vertical value are more/less than 0, both values will be set to 0 canceling diagonal movement.
             if ((horizontalInput > 0.1 || horizontalInput < -0.1f) && (verticalInput > 0.1 || verticalInput < -0.1f))
             {
                 horizontalInput = 0; verticalInput = 0;
             }
+            //------
 
             if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
             {
