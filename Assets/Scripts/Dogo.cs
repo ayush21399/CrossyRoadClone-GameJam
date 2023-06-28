@@ -5,7 +5,7 @@ using UnityEngine;
 public class Dogo : MonoBehaviour
 {
 
-    //NOTE : REWRITE WHOLE WALKING-JUMPING SCRIPT BCZ OF COLLISION
+    //NOTE : REWRITE WHOLE WALKING-JUMPING SCRIPT BCZ OF COLLISION //update : It Works Now, but need to smoothen it in future.
 
     public float horizontalInput;
     public float verticalInput;
@@ -35,6 +35,11 @@ public class Dogo : MonoBehaviour
     //
     public float XaxisBound = 7f;
     public float riverXaxisBound = 7.3f;
+    //
+
+    //
+    public float ResturnPoint = 70f;
+    //
 
     //child direction to detact ray, 4 direction checkers. ----- not using as we directly shoot ray from dog
     ///public Transform forwardcheck;
@@ -75,7 +80,29 @@ public class Dogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //re sending player to the base ground so that game world doesnt continue to expand, also restating default value for targetpos and highestZpos
+        if (transform.position.z >= ResturnPoint)
+        {
+            Vector3 newposition = new Vector3(transform.position.x, transform.position.y, 2);
+            transform.position = newposition;
+            targetpos = new Vector3(transform.position.x,transform.position.y,0);
+            highestZpos = 0;
+        }
+            //remove all the cluter ground object which didnt get deleted by raycast of spawner.
+        if (transform.position.z >= (ResturnPoint - 2))
+        {
+            string[] objRemove = { "Road", "Grass", "Water" };
+
+            foreach (string tag in objRemove)
+            {
+                GameObject[] gameObjects = GameObject.FindGameObjectsWithTag(tag);
+                foreach (GameObject gameObject in gameObjects)
+                {
+                    Destroy(gameObject);
+                }
+            }
+        }
+        //-------------------
         //-----collision detection-----
 
         //-----------------------------
@@ -271,20 +298,20 @@ public class Dogo : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-       // if (collision.gameObject.CompareTag("Tree"))
-       // {
-            //transform.position = targetpos;
-            //Destroy(gameObject);
-            //rb.AddForce(startPosition);
-            //isMoving = true;
-            //movecheck = false;
+        // if (collision.gameObject.CompareTag("Tree"))
+        // {
+        //transform.position = targetpos;
+        //Destroy(gameObject);
+        //rb.AddForce(startPosition);
+        //isMoving = true;
+        //movecheck = false;
 
-       // }
-       //checking water collision will make game over
-        if (collision.gameObject.CompareTag("Water"))
+        // }
+        //checking water collision will make game over
+        if (collision.gameObject.CompareTag("Water") || collision.gameObject.CompareTag("Car"))
         {
             //gameover();
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

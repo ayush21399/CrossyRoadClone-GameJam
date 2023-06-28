@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3952993187453491697}
   m_Layer: 0
   m_Name: Car
-  m_TagString: Untagged
+  m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,6 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  leftspawn: {fileID: 0}
+  rightspawn: {fileID: 0}
+  spawnDirection: {fileID: 0}
 --- !u!54 &3952993187453491697
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -7,6 +7,11 @@ TagManager:
   - LOG
   - Tree
   - PLAYER
+  - Water
+  - mainPlain
+  - Car
+  - Grass
+  - Road
   layers:
   - Default
   - TransparentFX
