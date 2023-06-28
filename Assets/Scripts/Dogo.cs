@@ -28,6 +28,9 @@ public class Dogo : MonoBehaviour
     Vector3 startPosition;
     Vector3 jumpTargetPosition;
 
+    //to limit players backward movement. edit maxbackdist to controll the backward movement limit, highestzpos will update with highest z postion of player.
+    public float maxBackDist = 5f;
+    public float highestZpos = 0;
 
     //child direction to detact ray, 4 direction checkers. ----- not using as we directly shoot ray from dog
     ///public Transform forwardcheck;
@@ -169,6 +172,17 @@ public class Dogo : MonoBehaviour
                 horizontalInput = 0;
             }
             //------
+            // player will only be able to move back untill certain distance, dist will get updated as player keps moving forward.           
+            if (transform.position.z > highestZpos)
+            {
+                highestZpos = transform.position.z;
+                
+            }            
+            if(verticalInput < -0.1 && highestZpos - maxBackDist > transform.position.z)
+            {
+                    verticalInput = 0;
+            }
+            //---------
 
             if (Mathf.Abs(horizontalInput) > 0.1f || Mathf.Abs(verticalInput) > 0.1f)
             {
