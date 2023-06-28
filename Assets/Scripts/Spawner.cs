@@ -9,6 +9,9 @@ public class Spawner : MonoBehaviour
 
 
     public GameObject road;
+    public GameObject grass;
+    public GameObject water;
+
     public GameObject Dogo;
 
     public Transform upSpawn;
@@ -90,8 +93,27 @@ public class Spawner : MonoBehaviour
     }
     public void spawning()
     {
+        GameObject spawnobj;
+        int spawnidx = Random.Range(0, 3);
+
+        switch (spawnidx)
+        {
+            case 0:
+                spawnobj = road;
+                break;
+            case 1:
+                spawnobj = grass;
+                break;
+            case 2:
+                spawnobj = water;
+                break;
+            default:
+                spawnobj = grass;
+                break;
+        }
+
         Vector3 spawnexactpost = new Vector3(0, 0, Mathf.RoundToInt(upSpawn.position.z)); //we can use upspawn, but upspawn position is different, we need to spawn road in x-y 0-0 and changed z.
-        Instantiate(road, spawnexactpost, Quaternion.identity);
+        Instantiate(spawnobj, spawnexactpost, Quaternion.identity);
 
     }
     public void despawning(RaycastHit hittwo)

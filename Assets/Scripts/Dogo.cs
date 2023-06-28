@@ -32,6 +32,10 @@ public class Dogo : MonoBehaviour
     public float maxBackDist = 5f;
     public float highestZpos = 0;
 
+    //
+    public float XaxisBound = 7f;
+    public float riverXaxisBound = 7.3f;
+
     //child direction to detact ray, 4 direction checkers. ----- not using as we directly shoot ray from dog
     ///public Transform forwardcheck;
     ///public Transform backwardcheck;
@@ -39,7 +43,7 @@ public class Dogo : MonoBehaviour
     ///public Transform rightcheck;
     //------
     public float raycastdist = 1f; // make it 1
-    public float raycastinterval = 10f;
+    public float raycastinterval = 2f;
     public float timer = 0f;
     private Ray rayfor; private RaycastHit hitfor; public bool forr = false;
     private Ray raybac; private RaycastHit hitbac; public bool bacc = false;
@@ -71,7 +75,7 @@ public class Dogo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        
         //-----collision detection-----
 
         //-----------------------------
@@ -85,6 +89,8 @@ public class Dogo : MonoBehaviour
         //
 
         ismovingcheck();
+
+        gameover(); //gameover
     }
 
     public void raycheck()
@@ -167,7 +173,7 @@ public class Dogo : MonoBehaviour
             }
             //------
             // to keep player within bound of limited x axis,
-            if ((transform.position.x <= -10 && horizontalInput == -1) || (transform.position.x >= 10 && horizontalInput == 1))
+            if ((transform.position.x <= -XaxisBound && horizontalInput == -1) || (transform.position.x >= XaxisBound && horizontalInput == 1))
             {
                 horizontalInput = 0;
             }
@@ -265,14 +271,20 @@ public class Dogo : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Tree"))
-        {
+       // if (collision.gameObject.CompareTag("Tree"))
+       // {
             //transform.position = targetpos;
             //Destroy(gameObject);
             //rb.AddForce(startPosition);
             //isMoving = true;
             //movecheck = false;
 
+       // }
+       //checking water collision will make game over
+        if (collision.gameObject.CompareTag("Water"))
+        {
+            //gameover();
+            Destroy(gameObject);
         }
     }
 
@@ -289,6 +301,12 @@ public class Dogo : MonoBehaviour
     }
     */
     //-----------Collision detection-----
-
+    public void gameover()
+    {
+        if (transform.position.x> riverXaxisBound || transform.position.x < -riverXaxisBound)
+        {
+            Destroy(gameObject); //game over screen
+        }
+    }
 
 }
