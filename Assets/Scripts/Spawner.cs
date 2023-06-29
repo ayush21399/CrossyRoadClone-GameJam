@@ -33,6 +33,9 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f; //Debug.Log(Time.timeScale); //writing this here, as player looses goees to main and when he starts again, time.timescale stays zero. so just it fix that.
+                             ////if implementing pause-play feature, you can edit this in case of any error occurs.                    
+
         upSpawn = transform.Find("UpSpawn");
         downSpawn = transform.Find("DownSpawn");
 

@@ -35,6 +35,8 @@ public class Mainmenuui : MonoBehaviour
     {
         //Debug.Log("playgame button click");
         SceneManager.LoadScene("SampleScene");
+        //Time.timeScale = 1f;
+        //Debug.Log(Time.timeScale);
     }
     public void exitbuttonclick()
     {
