@@ -11,11 +11,11 @@ public class Dogo : MonoBehaviour
     public float verticalInput;
 
     public float gridsize = 1f;
-    public float movespeed = 8f;
+    public float movespeed = 7f;
 
     public float stutter = 0.2f;
 
-    public float jumphight = 0.25f;
+    public float jumphight = 0.15f;
     public float jumptime = 0.15f;
 
     Rigidbody rb; //have'nt used rb yet
