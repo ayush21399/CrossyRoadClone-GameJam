@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement style="height: 696px; width: auto; align-items: stretch; justify-content: flex-start; position: relative;">
+        <ui:VisualElement style="height: 156px; margin-top: 20px;">
+            <ui:Label text="Score : " display-tooltip-when-elided="true" name="scval" style="font-size: 20px; color: rgb(245, 72, 1); -unity-font: initial; -unity-text-align: upper-left; -unity-text-outline-color: rgb(0, 0, 0); letter-spacing: 5px; word-spacing: 5px; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; height: 28px;">
+                <ui:Label text="0" display-tooltip-when-elided="true" name="sc" focusable="false" style="-unity-text-align: upper-left; align-items: auto; justify-content: flex-start; flex-wrap: nowrap; flex-direction: column; position: relative; left: auto; height: auto; white-space: nowrap; top: auto; padding-left: 0; margin-left: 90px; bottom: auto; padding-top: initial; margin-top: initial;" />
+            </ui:Label>
+            <ui:Label text="Level : " display-tooltip-when-elided="true" name="leval" style="height: 0; font-size: 20px; color: rgb(245, 72, 1); letter-spacing: 5px;">
+                <ui:Label text="0" display-tooltip-when-elided="true" name="le" style="height: auto; word-spacing: 5px; padding-left: 0; margin-left: 90px; padding-top: initial; margin-top: initial;" />
+            </ui:Label>
+        </ui:VisualElement>
+        <ui:VisualElement name="ge" style="height: 504px; display: flex; visibility: visible;">
+            <ui:Label text="GameOver" display-tooltip-when-elided="true" name="GameOver" style="align-items: center; justify-content: flex-end; height: 114px; display: flex; visibility: hidden; font-size: 30px; -unity-text-align: middle-center; color: rgb(217, 146, 1); letter-spacing: 15px; word-spacing: 12px; -unity-font-style: bold; white-space: nowrap; -unity-background-scale-mode: stretch-to-fill; background-color: rgb(65, 96, 68); -unity-background-image-tint-color: rgb(255, 255, 255); -unity-slice-top: 0;" />
+            <ui:Button text="Main Menu" display-tooltip-when-elided="true" name="MainMenu" style="font-size: 30px; height: 96px; margin-top: 30px; padding-left: 6px; color: rgb(217, 146, 1); background-color: rgb(48, 110, 120); align-items: auto; justify-content: flex-start; width: 353px; top: auto; left: 30%; visibility: hidden;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

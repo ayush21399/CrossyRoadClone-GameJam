@@ -41,6 +41,10 @@ public class Dogo : MonoBehaviour
     public float ResturnPoint = 70f;
     //
 
+    //to help in ui
+    public float levelUI = 0f;
+    public bool GameOOver = false;
+
     //child direction to detact ray, 4 direction checkers. ----- not using as we directly shoot ray from dog
     ///public Transform forwardcheck;
     ///public Transform backwardcheck;
@@ -87,6 +91,8 @@ public class Dogo : MonoBehaviour
             transform.position = newposition;
             targetpos = new Vector3(transform.position.x,transform.position.y,0);
             highestZpos = 0;
+
+            levelUI++; //helping in UI script.
         }
             //remove all the cluter ground object which didnt get deleted by raycast of spawner.
         if (transform.position.z >= (ResturnPoint - 2))
@@ -310,7 +316,7 @@ public class Dogo : MonoBehaviour
         //checking water collision will make game over
         if (collision.gameObject.CompareTag("Water") || collision.gameObject.CompareTag("Car"))
         {
-            //gameover();
+            gameoverscreen();
             //Destroy(gameObject);
         }
     }
@@ -332,8 +338,15 @@ public class Dogo : MonoBehaviour
     {
         if (transform.position.x> riverXaxisBound || transform.position.x < -riverXaxisBound)
         {
-            Destroy(gameObject); //game over screen
+            //Destroy(gameObject); //game over screen
+            gameoverscreen();
         }
+
+    }
+    public void gameoverscreen()
+    {
+        Time.timeScale = 0f;
+        GameOOver = true;
     }
 
 }
