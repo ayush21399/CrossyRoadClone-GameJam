@@ -1,6 +1,6 @@
 # CrossyRoadClone-GameJam
-A replica of the well-known game Crossy Road. Created for the Sept Clone Game Jam.
+<p style="font-size: 24px; font-weight: bold;">A replica of the well-known game Crossy Road. Created for the Sept Clone Game Jam.</p>
 
-Status : Completed | Latest Verion : V4
+<p style="font-style: italic;">Status: <span style="color: green;">Completed</span> | Latest Version: <span style="color: blue;">V4</span></p>
 
-Play Game under : Builds > V4 > Crossy-Road-Clone-GJ.exe
+<p style="font-size: 18px; margin-top: 20px;"><a href="Builds/V4/Crossy-Road-Clone-GJ.exe" style="text-decoration: none; background-color: #ffcc00; color: #ffffff; padding: 10px 20px; border-radius: 5px; font-weight: bold;">Play Game</a></p>
