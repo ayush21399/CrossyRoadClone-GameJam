@@ -15,8 +15,8 @@ public class Dogo : MonoBehaviour
 
     public float stutter = 0.2f;
 
-    public float jumphight = 0.15f;
-    public float jumptime = 0.15f;
+    public float jumphight = 0.1f;
+    public float jumptime = 0.05f;
 
     Rigidbody rb; //have'nt used rb yet
 

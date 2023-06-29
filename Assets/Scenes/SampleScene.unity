@@ -622,8 +622,8 @@ MonoBehaviour:
   gridsize: 1
   movespeed: 7
   stutter: 0.2
-  jumphight: 0.15
-  jumptime: 0.15
+  jumphight: 0.1
+  jumptime: 0.05
   maxBackDist: 5
   highestZpos: 0
   XaxisBound: 7
