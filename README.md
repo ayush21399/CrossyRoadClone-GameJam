@@ -5,4 +5,4 @@
 
 <p style="font-size: 18px; margin-top: 20px;">Play Game under : Builds > V4 > Crossy-Road-Clone-GJ.exe</p>
 
-![Crossy Road Clone ScreenShot](Builds/Pictures/cr3.png)
+![Crossy Road Clone ScreenShot](Builds/Pictures/cr3.PNG)
