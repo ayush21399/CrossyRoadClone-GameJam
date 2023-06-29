@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Ui : MonoBehaviour
 {
@@ -72,7 +73,8 @@ public class Ui : MonoBehaviour
 
     public void mainbuttonclick()
     {
-        Debug.Log(sc);
+        //Debug.Log(sc);
+        SceneManager.LoadScene("mainmenu");
 
     }
 
